@@ -48,9 +48,8 @@ jobs:
               go -C "$svc" mod tidy
               go -C "$svc" build
               go -C "$svc" test ./tests
-            fi
             else
-              echo "Service not found"
+              echo "Service $svc not found"
               exit 1
             fi
             echo "=== $svc: done ==="
