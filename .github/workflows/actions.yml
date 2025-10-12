@@ -39,7 +39,6 @@ jobs:
           SERVICES=(
             auth-service
             encounter-service
-            mail-service
             user-service
           )
           for svc in "${SERVICES[@]}"; do
