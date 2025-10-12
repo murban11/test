@@ -1,0 +1,58 @@
+name: Run unit tests
+
+on:
+  push:
+    branches:
+      - main
+    pull_request:
+      types: [opened, synchronize]
+      branches:
+        - main
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go environment
+        uses: actions/setup-go@v6
+        with:
+          go-version: ">=1.25.0"
+          check-latest: true
+          cache-dependency-path: |
+            auth-service/go.sum
+            commons/go.sum
+            encounter-service/go.sum
+            mail-service/go.sum
+            user-service/go.sum
+
+      - name: Build microservices
+        run: |
+          set -euo pipefail
+          SERVICES=(
+            auth-service
+            encounter-service
+            mail-service
+            user-service
+          )
+          for svc in "${SERVICES[@]}"; do
+            echo "=== $svc: start ==="
+            if [ -d "$svc" ]; then
+              go -C "$svc" mod tidy
+              go -C "$svc" build
+              go -C "$svc" test ./tests
+            fi
+            else
+              echo "Service not found"
+              exit 1
+            fi
+            echo "=== $svc: done ==="
+          done
+        shell: bash

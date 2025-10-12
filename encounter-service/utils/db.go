@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"log"
+
 	"gorm.io/gorm"
 
 	"igaku/encounter-service/models"
