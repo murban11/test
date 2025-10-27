@@ -36,7 +36,7 @@ jobs:
       - name: Define `go_build` function
         run: |
           set -euo pipefail
-          cat > /tmp/go_service.sh <<'EOF'
+          cat > /tmp/go_build.sh <<'EOF'
           #!/usr/bin/env bash
           set -euo pipefail
           go_build() {
