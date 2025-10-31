@@ -96,9 +96,9 @@ services:
       - elk
 
   user:
-    image: cosmtrek/air
-    working_dir: /app
-    command: ["-c", "user-service/air.user.toml"]
+    build:
+      context: .
+      dockerfile: ./user-service/Dockerfile
     env_file:
       - .env
     environment:
@@ -110,8 +110,6 @@ services:
     expose:
       - 8080
     volumes:
-      - ./user-service:/app/user-service
-      - ./commons:/app/commons
       - go-mod-cache:/go/pkg/mod
       - go-build-cache:/root/.cache/go-build
     networks:
@@ -151,9 +149,9 @@ services:
       retries: 3
 
   auth:
-    image: cosmtrek/air
-    working_dir: /app
-    command: ["-c", "auth-service/air.auth.toml"]
+    build:
+      context: .
+      dockerfile: ./auth-service/Dockerfile
     environment:
       - RABBITMQ_URL=amqp://${RABBITMQ_USER}:${RABBITMQ_PASS}@rabbitmq:5672/
     env_file:
@@ -161,8 +159,6 @@ services:
     expose:
       - 8080
     volumes:
-      - ./auth-service:/app/auth-service
-      - ./commons:/app/commons
       - go-mod-cache:/go/pkg/mod
       - go-build-cache:/root/.cache/go-build
     networks:
@@ -180,9 +176,9 @@ services:
         tag: "igaku-auth-service"
 
   mail:
-    image: cosmtrek/air
-    working_dir: /app
-    command: ["-c", "mail-service/air.mail.toml"]
+    build:
+      context: .
+      dockerfile: ./mail-service/Dockerfile
     environment:
       - RABBITMQ_URL=amqp://${RABBITMQ_USER}:${RABBITMQ_PASS}@rabbitmq:5672/
     env_file:
@@ -190,8 +186,6 @@ services:
     expose:
       - 8080
     volumes:
-      - ./mail-service:/app/mail-service
-      - ./commons:/app/commons
       - go-mod-cache:/go/pkg/mod
       - go-build-cache:/root/.cache/go-build
     networks:
@@ -212,9 +206,9 @@ services:
 
   encounter:
     container_name: igaku-encounter
-    image: cosmtrek/air
-    working_dir: /app
-    command: ["-c", "encounter-service/air.encounter.toml"]
+    build:
+      context: .
+      dockerfile: ./encounter-service/Dockerfile
     env_file:
       - .env
     environment:
@@ -225,8 +219,6 @@ services:
     expose:
       - 8080
     volumes:
-      - ./encounter-service:/app/encounter-service
-      - ./commons:/app/commons
       - go-mod-cache:/go/pkg/mod
       - go-build-cache:/root/.cache/go-build
     networks:
