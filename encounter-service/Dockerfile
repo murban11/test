@@ -1,5 +1,5 @@
-FROM golang:latest AS builder
-RUN apt-get install git
+FROM golang:alpine
+RUN apk add --no-cache git
 WORKDIR /go/src
 COPY ./encounter-service ./encounter-service
 COPY ./commons ./commons
