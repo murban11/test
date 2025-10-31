@@ -78,7 +78,7 @@ jobs:
 
       - name: Build Docker image for user-service
         run: |
-          docker build -t ghcr.io/murban11/user:latest ./user-service
+          docker build -t ghcr.io/murban11/user:latest -f ./user-service/Dockerfile .
 
       - name: Push Docker image to GHCR
         run: |
