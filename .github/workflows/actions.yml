@@ -75,3 +75,11 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker image for user-service
+        run: |
+          docker build -t ghcr.io/murban11/user:latest user
+
+      - name: Push Docker image to GHCR
+        run: |
+          docker push ghcr.io/murban11/user:latest
