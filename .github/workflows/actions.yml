@@ -78,8 +78,8 @@ jobs:
 
       - name: Build Docker image for user-service
         run: |
-          docker build -t ghcr.io/murban11/user:latest -f ./user-service/Dockerfile .
+          docker build -t ghcr.io/${{ github.actor }}/user:latest -f ./user-service/Dockerfile .
 
       - name: Push Docker image to GHCR
         run: |
-          docker push ghcr.io/murban11/user:latest
+          docker push ghcr.io/${{ github.actor }}/user:latest
