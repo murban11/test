@@ -82,10 +82,10 @@ jobs:
       - name: Load `env.example`
         run: |
           cp .env.example .env
+          export REPOSITORY_OWNER="${{ github.repository_owner }}"
 
       - name: Build Docker image for user-service
         run: |
-          export REPOSITORY_OWNER="${{ github.repository_owner }}"
           docker compose build user
 
       - name: Push user-service image to GHCR
@@ -94,7 +94,6 @@ jobs:
 
       - name: Build Docker image for auth-service
         run: |
-          export REPOSITORY_OWNER="${{ github.repository_owner }}"
           docker compose build auth
 
       - name: Push auth-service image to GHCR
@@ -103,7 +102,6 @@ jobs:
 
       - name: Build Docker image for mail-service
         run: |
-          export REPOSITORY_OWNER="${{ github.repository_owner }}"
           docker compose build mail
 
       - name: Push mail-service image to GHCR
@@ -112,7 +110,6 @@ jobs:
 
       - name: Build Docker image for encounter-service
         run: |
-          export REPOSITORY_OWNER="${{ github.repository_owner }}"
           docker compose build encounter
 
       - name: Push encounter-service image to GHCR
