@@ -96,6 +96,7 @@ services:
       - elk
 
   user:
+    image: ghcr.io/${REPOSITORY_OWNER}/user:latest
     build:
       context: .
       dockerfile: ./user-service/Dockerfile
