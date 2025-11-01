@@ -79,10 +79,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Load `env.example`
+        run: |
+          cp .env.example .env
+
       - name: Build Docker image for user-service
         run: |
           export REPOSITORY_OWNER="${{ github.repository_owner }}"
-          source .env.example
           docker compose build user
 
       - name: Push user-service image to GHCR
