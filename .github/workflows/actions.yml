@@ -79,10 +79,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Load `env.example`
+      - name: Load environment variables
         run: |
           cp .env.example .env
-          export REPOSITORY_OWNER="${{ github.repository_owner }}"
+          echo "REPOSITORY_OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
 
       - name: Build Docker image for user-service
         run: |
