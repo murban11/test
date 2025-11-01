@@ -150,6 +150,7 @@ services:
       retries: 3
 
   auth:
+    image: ghcr.io/${REPOSITORY_OWNER}/auth:latest
     build:
       context: .
       dockerfile: ./auth-service/Dockerfile
@@ -177,6 +178,7 @@ services:
         tag: "igaku-auth-service"
 
   mail:
+    image: ghcr.io/${REPOSITORY_OWNER}/mail:latest
     build:
       context: .
       dockerfile: ./mail-service/Dockerfile
@@ -206,6 +208,7 @@ services:
       - mail
 
   encounter:
+    image: ghcr.io/${REPOSITORY_OWNER}/encounter:latest
     container_name: igaku-encounter
     build:
       context: .

@@ -91,3 +91,30 @@ jobs:
       - name: Push user-service image to GHCR
         run: |
           docker push ghcr.io/${{ github.repository_owner }}/user:latest
+
+      - name: Build Docker image for auth-service
+        run: |
+          export REPOSITORY_OWNER="${{ github.repository_owner }}"
+          docker compose build auth
+
+      - name: Push auth-service image to GHCR
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/auth:latest
+
+      - name: Build Docker image for mail-service
+        run: |
+          export REPOSITORY_OWNER="${{ github.repository_owner }}"
+          docker compose build mail
+
+      - name: Push mail-service image to GHCR
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/mail:latest
+
+      - name: Build Docker image for encounter-service
+        run: |
+          export REPOSITORY_OWNER="${{ github.repository_owner }}"
+          docker compose build encounter
+
+      - name: Push encounter-service image to GHCR
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/encounter:latest
