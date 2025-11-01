@@ -81,8 +81,7 @@ jobs:
 
       - name: Build Docker image for user-service
         run: |
-          REPOSITORY_OWNER="${{ github.repository_owner }}"
-          source .env.example
+          export REPOSITORY_OWNER="${{ github.repository_owner }}"
           docker compose build user
 
       - name: Push user-service image to GHCR
